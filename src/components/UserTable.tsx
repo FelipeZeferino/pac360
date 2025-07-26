@@ -1,7 +1,8 @@
 import type { IUser } from '../interfaces/User'
+import SkeletonUserTableRow from './skeletons/UserTableSkeleton'
 import UserTableRow from './UserTableRow'
 
-export default function UserTable({ users }: { users?: IUser[] }) {
+export default function UserTable({ users, loading }: { users?: IUser[]; loading?: boolean }) {
   return (
     <table className="min-w-full rounded border border-gray-200 bg-white shadow">
       <thead>
@@ -12,9 +13,9 @@ export default function UserTable({ users }: { users?: IUser[] }) {
         </tr>
       </thead>
       <tbody>
-        {users?.map((user: IUser) => (
-          <UserTableRow key={user.id} {...user} />
-        ))}
+        {loading
+          ? Array.from({ length: 6 }).map((_, i) => <SkeletonUserTableRow key={i} />)
+          : users?.map((user) => <UserTableRow key={user.id} {...user} />)}
       </tbody>
     </table>
   )

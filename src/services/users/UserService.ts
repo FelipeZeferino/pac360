@@ -16,7 +16,7 @@ const parseUsersResponse = (res: GetUsersResponse): IUser[] => {
   }))
 }
 
-async function getUsers(limit = 5, skip = 0) {
+async function getUsers(limit = 6, skip = 0) {
   const fields = 'firstName,lastName,email,image'
   try {
     const response = await UsersAPI.get('/users', {

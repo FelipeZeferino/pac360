@@ -8,18 +8,23 @@ import userService from '../services/users/UserService'
 export default function UserList() {
   const [searchTerm, setSearchTerm] = useState('')
   const [users, setUsers] = useState<IUser[]>(mockUsers)
+  const [loading, setLoading] = useState(true)
   const filteredUsers = users.filter((user: IUser) => user.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   useEffect(() => {
+    setLoading(true)
     userService
       .getUsers()
-      .then((data) => {
-        setUsers(data)
+      .then((users) => {
+        console.log(users)
+        setUsers(users)
+        setLoading(false)
       })
       .catch((error) => {
         console.error('Erro ao buscar usuários:', error)
         //toast.error('Erro ao buscar usuários')
         setUsers([])
+        setLoading(false)
       })
   }, [])
 
@@ -33,7 +38,7 @@ export default function UserList() {
         className="mb-6 w-full max-w-sm rounded-[25px] border border-gray-300 px-4 py-2 transition focus:ring-1 focus:outline-none"
       />
 
-      <UserTable users={filteredUsers ?? mockUsers} />
+      <UserTable users={filteredUsers} loading={loading} />
     </div>
   )
 }
