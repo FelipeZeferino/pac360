@@ -1,5 +1,5 @@
 // src/data/mockUsers.ts
-import { type IUser } from '../types/User'
+import { type IUser } from '../interfaces/User'
 
 export const mockUsers: IUser[] = [
   {

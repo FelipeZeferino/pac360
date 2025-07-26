@@ -1,9 +1,9 @@
-import type { IUser } from '../types/User'
+import type { IUser } from '../interfaces/User'
 import UserTableRow from './UserTableRow'
 
 export default function UserTable({ users }: { users?: IUser[] }) {
   return (
-    <table className="min-w-full bg-white border border-gray-200 rounded shadow">
+    <table className="min-w-full rounded border border-gray-200 bg-white shadow">
       <thead>
         <tr className="bg-gray-100 text-left text-sm text-gray-700 uppercase">
           <th className="px-6 py-3"></th>
