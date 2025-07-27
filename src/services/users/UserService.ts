@@ -13,22 +13,40 @@ function parseUsersResponse(res: GetUsersResponse): IUser[] {
 
 async function getUsers(limit = 10, skip = 0) {
   const fields = 'firstName,lastName,email,image'
-  try {
-    const response = await UsersAPI.get('/users', {
-      params: { limit, skip, select: fields },
-    })
+  const response = await UsersAPI.get('/users', {
+    params: { limit, skip, select: fields },
+  })
 
-    if (!response.data || !Array.isArray(response.data.users)) {
-      throw new Error('Formato inesperado da resposta da API')
-    }
-
-    return { data: response.data }
-  } catch (error) {
-    console.error('Erro ao buscar usuários:', error)
+  if (!response.data || !Array.isArray(response.data.users)) {
+    throw new Error('Formato inesperado da resposta da API')
   }
+
+  return { data: response.data }
+}
+async function getUserById(id: number) {
+  const fields = 'firstName,lastName,email,image,gender,birthdate'
+  const response = await UsersAPI.get(`/users/${id}`, {
+    params: { select: fields },
+  })
+  if (!response.data) {
+    throw new Error('Formato inesperado da resposta da API')
+  }
+  return response.data
+}
+
+function mapGender(userGender: string | undefined) {
+  const genderMap: Record<string, string> = {
+    female: 'feminino',
+    male: 'masculino',
+  }
+  if (!userGender) return 'Não Informado'
+
+  return genderMap[userGender] ?? userGender
 }
 
 export default {
   getUsers,
+  getUserById,
   parseUsersResponse,
+  mapGender,
 }
