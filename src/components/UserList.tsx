@@ -1,15 +1,15 @@
 // src/components/UserList.tsx
 import { useEffect, useState } from 'react'
-import { mockUsers } from '../data/mockUsers'
 import UserTable from './UserTable'
 import type { IUser } from '../interfaces/User'
 import userService from '../services/users/UserService'
 import { toast } from 'react-toastify'
+import { useLoading } from '../contexts/LoadingContext'
 
 export default function UserList() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [users, setUsers] = useState<IUser[]>(mockUsers)
-  const [loading, setLoading] = useState(true)
+  const [users, setUsers] = useState<IUser[]>([])
+  const { setLoading } = useLoading()
   const filteredUsers = users.filter((user: IUser) => user.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   useEffect(() => {
@@ -25,7 +25,6 @@ export default function UserList() {
         setLoading(false)
       }
     }
-
     setLoading(true)
     fetchUsers()
   }, [])
@@ -39,8 +38,7 @@ export default function UserList() {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="mb-6 w-full max-w-sm rounded-[25px] border border-gray-300 px-4 py-2 transition focus:ring-1 focus:outline-none"
       />
-
-      <UserTable users={filteredUsers} loading={loading} />
+      <UserTable users={filteredUsers} />
     </div>
   )
 }
