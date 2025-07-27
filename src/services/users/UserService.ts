@@ -1,13 +1,8 @@
 import { UsersAPI } from './UsersAPI'
 import type { IUser } from '../../interfaces/User'
-import type { AxiosResponse } from 'axios'
 import type { GetUsersResponse } from '../../interfaces/UsersApi'
 
-// interface UserServiceInterface {
-//   getUsers():
-// }
-
-const parseUsersResponse = (res: GetUsersResponse): IUser[] => {
+function parseUsersResponse(res: GetUsersResponse): IUser[] {
   return res.users.map((user) => ({
     id: user.id,
     name: `${user.firstName} ${user.lastName}`,
@@ -16,7 +11,7 @@ const parseUsersResponse = (res: GetUsersResponse): IUser[] => {
   }))
 }
 
-async function getUsers(limit = 6, skip = 0) {
+async function getUsers(limit = 10, skip = 0) {
   const fields = 'firstName,lastName,email,image'
   try {
     const response = await UsersAPI.get('/users', {
@@ -27,14 +22,13 @@ async function getUsers(limit = 6, skip = 0) {
       throw new Error('Formato inesperado da resposta da API')
     }
 
-    const formatted = parseUsersResponse(response.data)
-    return formatted
+    return { data: response.data }
   } catch (error) {
     console.error('Erro ao buscar usuários:', error)
-    return []
   }
 }
 
 export default {
   getUsers,
+  parseUsersResponse,
 }

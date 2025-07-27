@@ -14,7 +14,7 @@ export default function UserTable({ users, loading }: { users?: IUser[]; loading
       </thead>
       <tbody>
         {loading
-          ? Array.from({ length: 6 }).map((_, i) => <SkeletonUserTableRow key={i} />)
+          ? Array.from({ length: 10 }).map((_, i) => <SkeletonUserTableRow key={i} />)
           : users?.map((user) => <UserTableRow key={user.id} {...user} />)}
       </tbody>
     </table>

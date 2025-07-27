@@ -4,6 +4,7 @@ import { mockUsers } from '../data/mockUsers'
 import UserTable from './UserTable'
 import type { IUser } from '../interfaces/User'
 import userService from '../services/users/UserService'
+import { toast } from 'react-toastify'
 
 export default function UserList() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -12,20 +13,21 @@ export default function UserList() {
   const filteredUsers = users.filter((user: IUser) => user.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   useEffect(() => {
-    setLoading(true)
-    userService
-      .getUsers()
-      .then((users) => {
-        console.log(users)
+    const fetchUsers = async () => {
+      try {
+        const response = await userService.getUsers()
+        const users = userService.parseUsersResponse(response?.data)
         setUsers(users)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar usuários:', error)
-        //toast.error('Erro ao buscar usuários')
+      } catch {
+        toast.error('Erro ao buscar usuários. Tente novamente mais tarde.')
         setUsers([])
+      } finally {
         setLoading(false)
-      })
+      }
+    }
+
+    setLoading(true)
+    fetchUsers()
   }, [])
 
   return (
