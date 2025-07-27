@@ -1,4 +1,3 @@
-// src/contexts/LoadingContext.tsx
 import { createContext, useContext, useState } from 'react'
 
 interface LoadingContextType {
@@ -11,11 +10,7 @@ const LoadingContext = createContext<LoadingContextType | undefined>(undefined)
 export const LoadingProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  return (
-    <LoadingContext.Provider value={{ isLoading, setLoading: setIsLoading }}>
-      {children}
-    </LoadingContext.Provider>
-  )
+  return <LoadingContext.Provider value={{ isLoading, setLoading: setIsLoading }}>{children}</LoadingContext.Provider>
 }
 
 export const useLoading = () => {
