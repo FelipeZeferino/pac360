@@ -16,7 +16,6 @@ async function getUsers(limit = 8, skip = 0) {
   const response = await UsersAPI.get('/users', {
     params: { limit, skip, select: fields },
   })
-  console.log(response)
 
   if (!response.data || !Array.isArray(response.data.users)) {
     throw new Error('Formato inesperado da resposta da API')
