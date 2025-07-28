@@ -1,6 +1,6 @@
 import axios from 'axios'
 
 export const UsersAPI = axios.create({
-  baseURL: 'https://dummyjson.com',
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 1000,
 })
