@@ -50,11 +50,12 @@ Arquitetura baseada em funcionalidades e tipos de arquivos
 
 os arquivos foram separados por tipo: components, contexts, interfaces..
 e por funcionalidade dentro do sistema, componentes genéricos ficam na pasta components, mas componentes específicos dentro da respectiva pasta da funcionalidade/domínio.
+```
 ├── components/
 │   └── Button.tsx  ← genérico
 ├── users/
 │   ├── UserTable.tsx ← específico da feature
-
+```
 A userService é responsável por centralizar toda a lógica de acesso à API, transformação dos dados e regras de negócio relacionadas a usuários.
 
 Tempo estimado:
