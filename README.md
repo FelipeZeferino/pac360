@@ -33,6 +33,8 @@ VITE_API_URL=https://sua-api.com
 
 A api pública usada no projeto tem a seguinte url: "https://dummyjson.com"
 
+
+Então, basta rodar
 ```bash
 npm run dev
 ```
