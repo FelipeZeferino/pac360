@@ -1,4 +1,4 @@
-import type { IUser } from '../interfaces/User'
+import type { IUser } from '../../interfaces/User'
 import { useNavigate } from 'react-router-dom'
 
 export default function UserTableRow({ avatar, name, email, id }: Pick<IUser, 'avatar' | 'name' | 'email' | 'id'>) {

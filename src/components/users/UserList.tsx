@@ -1,10 +1,11 @@
 // src/components/UserList.tsx
 import { useEffect, useState } from 'react'
 import UserTable from './UserTable'
-import type { IUser } from '../interfaces/User'
-import userService from '../services/users/UserService'
+import type { IUser } from '../../interfaces/User'
+import userService from '../../services/users/UserService'
 import { toast } from 'react-toastify'
-import { useLoading } from '../contexts/LoadingContext'
+import { useLoading } from '../../contexts/LoadingContext'
+import { Pagination } from '../Pagination'
 
 export default function UserList() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -16,7 +17,13 @@ export default function UserList() {
     const fetchUsers = async () => {
       try {
         const response = await userService.getUsers()
-        const users = userService.parseUsersResponse(response?.data)
+        const { skip, limit, total } = response
+        const currentPage = Math.ceil(skip / limit) + 1
+        console.log(`Current Page: ${currentPage}, Total Users: ${total}`)
+        console.log(limit)
+
+        // setCurrentPage()
+        const users = userService.parseUsersResponse(response)
         setUsers(users)
       } catch {
         toast.error('Erro ao buscar usuários. Tente novamente mais tarde.')
@@ -39,6 +46,10 @@ export default function UserList() {
         className="mb-6 w-full max-w-sm rounded-[25px] border border-gray-300 px-4 py-2 transition focus:ring-1 focus:outline-none"
       />
       <UserTable users={filteredUsers} />
+      {/* <Pagination currentPage={1} totalPages={Math.ceil(filteredUsers.length / 10)} onPageChange={(page) => { */}
+      {/* Implement page change logic here */}
+      {/* // console.log(`Page changed to: ${page}`) */}
+      {/* // }} /> */}
     </div>
   )
 }

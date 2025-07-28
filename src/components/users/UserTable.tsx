@@ -1,6 +1,6 @@
-import { useLoading } from '../contexts/LoadingContext'
-import type { IUser } from '../interfaces/User'
-import SkeletonUserTableRow from './skeletons/UserTableSkeleton'
+import { useLoading } from '../../contexts/LoadingContext'
+import type { IUser } from '../../interfaces/User'
+import SkeletonUserTableRow from '../skeletons/UserTableSkeleton'
 import UserTableRow from './UserTableRow'
 
 export default function UserTable({ users }: { users?: IUser[] }) {

@@ -11,17 +11,23 @@ function parseUsersResponse(res: GetUsersResponse): IUser[] {
   }))
 }
 
-async function getUsers(limit = 10, skip = 0) {
+async function getUsers(limit = 8, skip = 0) {
   const fields = 'firstName,lastName,email,image'
   const response = await UsersAPI.get('/users', {
     params: { limit, skip, select: fields },
   })
+  console.log(response)
 
   if (!response.data || !Array.isArray(response.data.users)) {
     throw new Error('Formato inesperado da resposta da API')
   }
 
-  return { data: response.data }
+  return {
+    users: response.data.users,
+    limit: response.data.limit,
+    total: response.data.total,
+    skip: response.data.skip,
+  }
 }
 async function getUserById(id: number) {
   const fields = 'firstName,lastName,email,image,gender,birthdate'
