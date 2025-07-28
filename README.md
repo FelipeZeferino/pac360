@@ -38,7 +38,8 @@ npm run dev
 ```
 
 ![Demonstração](./public/demo/Demo-users.png)
-![GIF de Demonstração](./public/demo/demo.gif)
+![GIF de Demonstração Busca](./public/demo/search-demo.gif)
+![GIF de Demonstração Detalhes do Usuário](./public/demo/userInfo-demo.gif)
 
 
 Decisões técnicas:
