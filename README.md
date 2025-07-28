@@ -1,69 +1,67 @@
-# React + TypeScript + Vite
+# 🧑‍💻 Projeto de Listagem de Usuários
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+URL do deploy: https://pac360.vercel.app/
 
-Currently, two official plugins are available:
+Este projeto é uma aplicação frontend construída com **React + Vite** que consome uma API REST para listar usuários com **paginação**, **loading skeleton**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Tecnologias
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Axios](https://axios-http.com/)
+- [React Router](https://reactrouter.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Loading Skeleton](https://github.com/dvtng/react-loading-skeleton)
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Instalação
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/FelipeZeferino/pac360.git
+cd pac360
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Crie um arquivo `.env` na raiz do projeto e defina as variáveis de ambiente necessárias, por exemplo:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_API_URL=https://sua-api.com
 ```
+
+A api pública usada no projeto tem a seguinte url: "https://dummyjson.com"
+
+```bash
+npm run dev
+```
+
+![Demonstração](./public/demo/Demo-users.png)
+![GIF de Demonstração](./public/demo/demo.gif)
+
+
+Decisões técnicas:
+
+Arquitetura baseada em funcionalidades e tipos de arquivos
+
+os arquivos foram separados por tipo: components, contexts, interfaces..
+e por funcionalidade dentro do sistema, componentes genéricos ficam na pasta components, mas componentes específicos dentro da respectiva pasta da funcionalidade/domínio.
+├── components/
+│   └── Button.tsx  ← genérico
+├── users/
+│   ├── UserTable.tsx ← específico da feature
+
+A userService é responsável por centralizar toda a lógica de acesso à API, transformação dos dados e regras de negócio relacionadas a usuários.
+
+Tempo estimado:
+
+Configuração inicial do projeto - 1h
+Desenvolvimento - 4h
+Testes - 1h
+Deploy e documentação - 1h
+
+Total - 7h
+
+
+
